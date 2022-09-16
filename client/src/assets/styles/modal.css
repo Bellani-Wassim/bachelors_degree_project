@@ -1,0 +1,147 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .5);
+}
+
+#myAccount {
+  width: 700px;
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 440px;
+  width: 650px;
+  transform: translate(-50%, -50%);
+  background-color: var(--Dark-color-400);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
+}
+
+.modal-title {
+  text-align: center;
+  color: #FFF;
+  margin-bottom: 50px;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+.flex-box-my-account {
+  display: flex;
+  flex-direction:column;
+}    
+
+.flex-box-my-account .messageDerreur,.flex-box-my-account .messagePositif{
+  align-self: center;
+  position: absolute;
+  top: 70px;
+}
+
+.my-account-row {
+  height: 50px;
+  display: flex;
+  flex-direction:row;
+}
+
+.my-account-row > h5 {
+  flex: 1;
+}
+
+.my-account-row > h5:nth-child(1) {
+  flex-grow: 1.2;
+}
+
+.my-account-row > h5:nth-child(2) {
+  flex-grow: 3;
+  color: rgb(182, 182, 182);
+}
+
+.my-account-row > input{
+  flex-grow: 0.34;
+}
+
+.my-account-row > div{
+  flex-grow: 0.28;
+}
+
+.my-account-row > .cancelEditData{
+  flex-grow: 0.1;
+  color: rgb(248, 114, 114);
+  cursor: pointer;
+
+}
+
+.my-account-row > .confirmEditData{
+  color: var(--primary-color);
+  cursor: pointer;
+
+}
+
+.my-account-row > h5:nth-child(3) {
+  flex-grow: 0.5;
+}
+
+.editEmployeData {
+  cursor: pointer;
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+.modal h5{
+  color: #FFF;
+}
+
+.closeIcon {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+  filter: invert(70%) sepia(3%) saturate(0%) hue-rotate(298deg) brightness(101%) contrast(95%);
+}
+
+.closeIcon:hover {
+  height: 32px;
+  width: 32px;
+}
+
+.my-account-row input {
+  height: 30px;
+  padding: 8px 0px 6px 4px;
+  background-color: var(--Dark-color-400);
+  border: none;
+  color: #FFF;
+  font-size: 1.31em;
+  font-family: var(--poppins);
+  margin-right: 10px;
+}
+
+.change-password p{
+  color: #FFF;
+}
+
+.change-password input{
+  border: solid #FFF;
+  border-width: 2px;
+  border-radius: 3px;
+}
+
+.change-password img, .authentification img{
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(324deg) brightness(100%) contrast(103%);
+}

@@ -1,0 +1,134 @@
+.Employe h1{
+  color: #FFF;
+  margin-bottom: 17px;
+}
+
+.table_body::-webkit-scrollbar {
+  width: 15px;
+  cursor: pointer;
+}
+
+.table_body::-webkit-scrollbar-track {
+  box-shadow:transparent; 
+}
+
+.table_body::-webkit-scrollbar-thumb {
+  background: var(--Dark-color-250); 
+  border-top: 30px; 
+  border-radius: 7px;
+}
+
+.table_body::-webkit-scrollbar-thumb:hover {
+  background: var(--Dark-color-200); 
+}
+
+.fake_button {
+  background-color: var(--Dark-color-300);
+  color: var(--Dark-color-300);
+  border: none;
+  margin-right: 10px;
+  padding: 3px 5px 3px 5px;
+}
+
+.table_row button {
+  border: none;
+  border-radius: 5px;
+  color: #FFF;
+  padding: 3px 5px 3px 5px;
+  cursor: pointer;
+  height: 25px;
+}
+
+.approve_button {
+  background-color: var(--primary-color);
+  margin-left: 20px;
+}
+
+.approve_button:hover {
+  background-color: var(--quaternary-color);
+}
+
+.dismiss_button {
+  background-color: rgb(252, 96, 96);
+}
+
+.dismiss_button:hover {
+  background-color: rgb(255, 144, 144);
+}
+
+.Employe p{
+  color: #FFF;
+  overflow-wrap: anywhere;
+}
+
+.Employe {
+  padding: 30px;
+  flex: 1;
+}
+
+.table_employe, .table_inscription{
+  max-width: 920px;
+  width: 100%;
+  height: 92%;
+}
+.table_body{
+  overflow-y: scroll;
+  height: 92%;
+}
+
+.table_row, .table_head {
+  display: flex;
+  flex-direction:row;
+  padding: 0px 17px 0px 16px;
+}
+
+.table_head {
+  margin: 5px 0px 0px 0px;
+  padding: 6px 171px 0px 16px;
+  background-color: var(--Dark-color-300);
+  height: 38px;
+  border-radius: 5px;
+}
+
+.table_row {
+  margin: 15px 0px 20px 0px;
+}
+
+.table_head > p, .table_row > p{
+  flex: 1;
+}
+
+.table_head > p:nth-child(1), .table_row > p:nth-child(1){
+  flex-grow: 1;
+}
+
+.table_head > p:nth-child(2), .table_row > p:nth-child(2){
+  flex-grow: 1;
+}
+
+.table_head > p:nth-child(3), .table_row > p:nth-child(3){
+  flex-grow: 2;
+}
+
+.table_head > p:nth-child(4), .table_row > p:nth-child(4), .table_row > div{
+  flex-grow: 0.4;
+}
+
+.table_row > button:nth-child(1), .table_head > button:nth-child(1){
+  flex-grow: 1;
+}
+
+.table_row > button:nth-child(2), .table_head > button:nth-child(2){
+  flex-grow: 1;
+}
+
+.star_icon {
+  height: 30px;
+  width: 30px;
+  filter: invert(70%) sepia(3%) saturate(0%) hue-rotate(298deg) brightness(101%) contrast(95%);
+  cursor: pointer;
+}
+
+.star_div {
+  padding-left: 6px;
+}

@@ -1,0 +1,342 @@
+#ticket {
+  height: 1500px;
+}
+
+.ticket_container {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll
+}
+
+.ticket {
+  position: relative;
+  margin: 0px 0px 0px 60px;
+  height: 100%;
+  width: 800px;
+}
+
+.ticket img {
+  display: block;
+  margin: 65px auto 0px auto;
+}
+
+.input_fiche_preventive {
+  position: absolute;
+  top: 261px;
+  left: 512px;
+  width: 30px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.input_fiche_curative {
+  position: absolute;
+  top: 261px;
+  left: 749px;
+  width: 30px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.ticket_ouvert{
+  position: absolute;
+  top: 316px;
+  left: 210px;
+  width: 24px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.ticket_ferme {
+  position: absolute;
+  top: 316px;
+  left: 316px;
+  width: 24px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.numero_ticket {
+  position: absolute;
+  top: 323px;
+  left: 133px;
+  width: 68px;
+  height: 20px;
+}
+
+.trimestre {
+  position: absolute;
+  top: 284px;
+  left: 208px;
+  width: 40px;
+  height: 20px;
+}
+
+.annees {
+  position: absolute;
+  top: 284px;
+  left: 274px;
+  width: 31px;
+  height: 20px;
+}
+
+.site {
+  position: absolute;
+  top: 486px;
+  left: 63px;
+  width: 174px;
+  height: 59px;
+  resize: none;
+}
+
+.date_heure_signalisation {
+  position: absolute;
+  top: 486px;
+  left: 237px;
+  width: 167px;
+  height: 59px;
+  resize: none;
+}
+
+.date_heure_reponse {
+  position: absolute;
+  top: 486px;
+  left: 404px;
+  width: 215px;
+  height: 60px;
+  resize: none;
+}
+
+.severite {
+  position: absolute;
+  top: 486px;
+  left: 619px;
+  width: 84px;
+  height: 61px;
+  resize: none;
+}
+
+.temp_restoration {
+  position: absolute;
+  top: 486px;
+  left: 703px;
+  width: 119px;
+  height: 61px;
+  resize: none;
+}
+
+.temp_resolution {
+  position: absolute;
+  top: 486px;
+  left: 822px;
+  width: 144px;
+  height: 61px;
+  resize: none;
+}
+
+.res_servers_pseries{
+  position: absolute;
+  top: 625px;
+  left: 456px;
+  width: 90px;
+  height: 30px;
+  resize: none;
+}
+
+.ob_servers_pseries{
+  position: absolute;
+  top: 626px;
+  left: 546px;
+  width: 440px;
+  height: 30px;
+  resize: none;
+}
+
+.res_servers_intel{
+  position: absolute;
+  top: 655px;
+  left: 456px;
+  width: 90px;
+  height: 30px;
+  resize: none;
+}
+
+.ob_servers_intel{
+  position: absolute;
+  top: 656px;
+  left: 546px;
+  width: 440px;
+  height: 30px;
+  resize: none;
+}
+
+.res_baie_disque{
+  position: absolute;
+  top: 685px;
+  left: 456px;
+  width: 90px;
+  height: 29px;
+  resize: none;
+}
+
+.ob_baie_disque{
+  position: absolute;
+  top: 686px;
+  left: 546px;
+  width: 440px;
+  height: 30px;
+  resize: none;
+}
+
+.res_bladecenter{
+  position: absolute;
+  top: 714px;
+  left: 456px;
+  width: 90px;
+  height: 26px;
+  resize: none;
+}
+
+.ob_bladecenter{
+  position: absolute;
+  top: 716px;
+  left: 546px;
+  width: 440px;
+  height: 25px;
+  resize: none;
+}
+
+.res_robot_sauvegarde{
+  position: absolute;
+  top: 740px;
+  left: 456px;
+  width: 90px;
+  height: 29px;
+  resize: none;
+}
+
+.ob_robot_sauvegarde{
+  position: absolute;
+  top: 741px;
+  left: 546px;
+  width: 440px;
+  height: 28px;
+  resize: none;
+}
+
+.res_switch{
+  position: absolute;
+  top: 769px;
+  left: 456px;
+  width: 90px;
+  height: 30px;
+  resize: none;
+}
+
+.ob_switch{
+  position: absolute;
+  top: 769px;
+  left: 546px;
+  width: 440px;
+  height: 30px;
+  resize: none;
+}
+
+.res_imprimante{
+  position: absolute;
+  top: 799px;
+  left: 456px;
+  width: 90px;
+  height: 31px;
+  resize: none;
+}
+
+.ob_imprimante{
+  position: absolute;
+  top: 799px;
+  left: 546px;
+  width: 440px;
+  height: 31px;
+  resize: none;
+}
+
+.res_onduleur{
+  position: absolute;
+  top: 830px;
+  left: 456px;
+  width: 90px;
+  height: 34px;
+  resize: none;
+}
+
+.ob_onduleur{
+  position: absolute;
+  top: 830px;
+  left: 546px;
+  width: 440px;
+  height: 34px;
+  resize: none;
+}
+
+.conclusion_generale {
+  position: absolute;
+  top: 895px;
+  left: 58px;
+  width: 908px;
+  height: 151px;
+  resize: none;
+}
+
+.nom_sbm {
+  position: absolute;
+  top: 1145px;
+  left: 106px;
+  width: 288px;
+  height: 30px;
+  resize: none;
+}
+
+.nom_client {
+  position: absolute;
+  top: 1144px;
+  left: 767px;
+  width: 220px;
+  height: 30px;
+  resize: none;
+}
+
+.commentaire_client {
+  position: absolute;
+  top: 1145px;
+  left: 395px;
+  width: 318px;
+  height: 177px;
+  resize: none;
+}
+
+.nuu {
+  height: 40px;
+  width: 40px;
+}
+
+#dl {
+  cursor: pointer;
+}
+
+.button_container ,#preview_button{
+  position:absolute;
+  top: 25px;
+  right: 75px;
+}
+
+.button_container button:nth-child(1) {
+  margin-right: 23px;
+}
+
+.display_none {
+  display: none;
+}
+
+.ticket_container canvas {
+  height: 1500px;
+}
