@@ -1,5 +1,5 @@
 module.exports = ({
-  Fournisseur, IGE, Plateforme, Site, Panne, Contrat, Equipement, Technicien, Ticket,
+  Fournisseur, IGE, Plateforme, Site, Panne, Contrat, Equipement, Technicien, Ticket, Employe,
 }) => () => Promise.all([
   Fournisseur.create({
     id: '123',
@@ -22,9 +22,11 @@ module.exports = ({
     nom: 'nom du site',
   }),
   Employe.create({
-    nom: 'wassim',
-    prenom: 'bellani',
-    motDePasse: '12345',
+    id_user: '0000',
+    nom: 'Aliane',
+    prenom: 'Yamina',
+    email: 'yamina.aliane@algerietelecom.dz', 
+    motDePasse: '$2b$10$y/CGD5mNjpDN.PG9RxnM0u2kL62cezwgl9OLGRTaBdscOZtFEnF0G',
     admin: true,
     isApproved: true,
   }),

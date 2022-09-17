@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext} from "react";
 import "../assets/styles/employe.css";
+import { APIStoreContext } from "../APIStoreContext";
 import axios from 'axios';
 
 export default function Inscription({socket}) {
   const [employes, setEmployes] = useState([]);
   const [registrationRequest,setRegistrationRequest] = useState([]);
 
+  const { socketStore } = useContext(APIStoreContext);
+
   const refuserLaDemande = (index) => {
     const email = employes[index].email;
     axios
       .put('http://localhost:3546/api/employe/delete/', {email})
       .then(() => {
-        socket.emit('demande_dinscription_rejeter',  employes[index].email );
+        socketStore.socket.emit('demande_dinscription_rejeter',  employes[index].email );
         getEmploye();})
       .catch(error => console.log(error));
   }
@@ -21,13 +24,13 @@ export default function Inscription({socket}) {
     axios
       .put('http://localhost:3546/api/employe/approve/', {email})
       .then(() => {
-      socket.emit('demande_approuver', employes[index].email);
+      socketStore.socket.emit('demande_approuver', employes[index].email);
       getEmploye();})
       .catch(error => console.log(error));
       
   }
 
-  socket.on("mettre_a_jour_inscription", () => {
+  socketStore.socket.on("mettre_a_jour_inscription", () => {
     getEmploye();
   })
 

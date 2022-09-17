@@ -32,7 +32,7 @@ export default function Employe({socket}) {
       .catch(error => console.log(error));
   }
 
-  socket.on("mettre_a_jour_employe", () => {
+  socketStore.socket.on("mettre_a_jour_employe", () => {
     getEmploye();
   })
 

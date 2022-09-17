@@ -19,6 +19,7 @@ module.exports = {
       return;
     }
 
+    console.log(employe);
     const motDePasseBD = employe.motDePasse;
 
     bcrypt.compare(motDePasse, motDePasseBD).then((match) => {
