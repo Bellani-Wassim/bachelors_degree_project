@@ -2,7 +2,7 @@
   height: 1500px;
 }
 
-.ticket_container {
+.ticket_container ,.ticket_container_ag{
   height: 100%;
   width: 100%;
   overflow-y: scroll
@@ -45,6 +45,96 @@
   width: 24px;
   height: 35px;
   cursor: pointer;
+}
+
+.ticket_container_ag .ticket_ouvert{
+  top: 558px;
+  left: 312px;
+}
+
+.ticket_container_ag .ticket_ferme{
+  top: 559px;
+  left: 451px;
+}
+
+.num_ticket {
+  position: absolute;
+  top: 400px;
+  left: 289px;
+  width: 286px;
+  height: 29px;
+  font-size: 22px;
+}
+.equipement_1{
+  position: absolute;
+  top: 964px;
+  left: 15px;
+  width: 279px;
+  height: 40px;
+}
+.type_1{
+  position: absolute;
+  top: 964px;
+  left: 293px;
+  width: 211px;
+  height: 40px;
+}
+.num_serie_1{
+  position: absolute;
+  top: 964px;
+  left: 504px;
+  width: 177px;
+  height: 40px;
+}
+.etat_1{
+  position: absolute;
+  top: 964px;
+  left: 681px;
+  width: 112px;
+  height: 40px;
+}
+.observation_1{
+  position: absolute;
+  top: 964px;
+  left: 793px;
+  width: 352px;
+  height: 40px;
+}
+
+.id_site {
+  position: absolute;
+  top: 433px;
+  left: 179px;
+  width: 396px;
+  height: 29px;
+  font-size: 22px;
+}
+
+.id_fournisseur {
+  position: absolute;
+  top: 466px;
+  left: 283px;
+  width: 292px;
+  height: 29px;
+  font-size: 22px;
+}
+
+.id_technicien {
+  position: absolute;
+  top: 498px;
+  left: 275px;
+  width: 301px;
+  height: 29px;
+  font-size: 22px;
+}
+
+.periode {
+  position: absolute;
+  top: 530px;
+  left: 219px;
+  width: 356px;
+  height: 29px;
+  font-size: 22px;
 }
 
 .ticket_ferme {
@@ -287,6 +377,15 @@
   resize: none;
 }
 
+.conclusion_generale_ticket {
+  position: absolute;
+  top: 686px;
+  left: 52px;
+  width: 908px;
+  height: 151px;
+  resize: none;
+}
+
 .nom_sbm {
   position: absolute;
   top: 1145px;
@@ -323,20 +422,29 @@
   cursor: pointer;
 }
 
+#idCanvas {
+  margin-top: 65px;
+}
+
 .button_container ,#preview_button{
   position:absolute;
   top: 25px;
-  right: 75px;
+  right: 100px;
+  font-size: 17px;
 }
 
 .button_container button:nth-child(1) {
   margin-right: 23px;
 }
 
+.button_container button{
+  font-size: 17px;
+}
+
 .display_none {
   display: none;
 }
 
-.ticket_container canvas {
+.ticket_container canvas,.ticket_container_ag canvas{
   height: 1500px;
 }

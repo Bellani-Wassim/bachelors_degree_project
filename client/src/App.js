@@ -6,6 +6,7 @@ import { observer } from "mobx-react";
 import MyAccount from "./components/MyAccount";
 import settings from './assets/images/settings.svg';
 import Employe from './pages/Employe';
+import Ticket from './pages/Ticket';
 import Login from './components/Login';
 import Inscription from './pages/Inscription'
 import SideBarNav from './components/SideBarNav.jsx';
@@ -45,6 +46,8 @@ function App() {
 					<Route path="/plateformes" element={<Plateforme />} />
 
 					<Route path="/FicheDintervetionGenerator" element={<FicheDinterventionGenerator /> } />
+
+					<Route path="/Ticket" element={<Ticket /> } />
 
 					{isAdmin && 
 					<>
