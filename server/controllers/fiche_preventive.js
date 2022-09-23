@@ -31,7 +31,7 @@ module.exports = {
         FichePreventiveIdTicket:"0",
       });
 
-      res.status(201).json(dbRes);
+      res.status(201).json(dbRes2);
     } catch (error) {
       next(error);
     }

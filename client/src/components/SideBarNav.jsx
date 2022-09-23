@@ -47,7 +47,7 @@ export default function SideBarNav({isAdmin}) {
 
           <NavLink to="/Ticket" className={isActiveClass}>
             <li>
-              <h6>cree ticket</h6>
+              <h6>ticket</h6>
             </li>
           </NavLink>
 
