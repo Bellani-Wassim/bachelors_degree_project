@@ -71,12 +71,14 @@
   left: 15px;
   width: 279px;
   height: 40px;
+  font-size: 22px;
 }
 .type_1{
   position: absolute;
   top: 964px;
   left: 293px;
   width: 211px;
+  font-size: 22px;
   height: 40px;
 }
 .num_serie_1{
@@ -85,6 +87,7 @@
   left: 504px;
   width: 177px;
   height: 40px;
+  font-size: 22px;
 }
 .etat_1{
   position: absolute;
@@ -92,6 +95,7 @@
   left: 681px;
   width: 112px;
   height: 40px;
+  font-size: 22px;
 }
 .observation_1{
   position: absolute;
@@ -99,6 +103,7 @@
   left: 793px;
   width: 352px;
   height: 40px;
+  font-size: 22px;
 }
 
 .id_site {
@@ -384,6 +389,7 @@
   width: 908px;
   height: 151px;
   resize: none;
+  font-size: 22px;
 }
 
 .nom_sbm {
