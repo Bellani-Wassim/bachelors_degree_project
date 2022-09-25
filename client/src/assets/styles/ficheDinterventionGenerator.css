@@ -443,15 +443,33 @@
   margin-top: 65px;
 }
 
-.button_container ,#preview_button{
-  position:absolute;
-  top: 25px;
-  right: 100px;
+#return_button {
+  position: absolute;
+  top: 20px;
+  margin-left: 20px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  filter: invert(70%) sepia(3%) saturate(0%) hue-rotate(298deg) brightness(101%) contrast(95%);
+}
+
+#preview_button{
+  position: absolute;
+  top: 17px;
+  margin-left: 1144px;
   font-size: 17px;
 }
 
 .button_container button:nth-child(1) {
-  margin-right: 23px;
+  position: absolute;
+  margin-left: 820px;
+  top : 17px;
+}
+
+.button_container button:nth-child(2) {
+  position: absolute;
+  margin-left: 926px;
+  top : 17px;
 }
 
 .button_container button{
@@ -464,4 +482,63 @@
 
 .ticket_container canvas,.ticket_container_ag canvas{
   height: 1500px;
+}
+
+.tableRowticket:nth-child(-n + 2) .dropDownMenu,
+.tableRowticket:nth-last-child(n+3) .dropDownMenu{
+  top: 38px;
+}
+
+.tableRowticket:nth-last-child(-n + 2) .dropDownMenu{
+  bottom: 48px;
+}
+
+.tableRowticket{
+  display: flex;
+  flex-direction: row;
+  padding-left: 45px;
+  margin-bottom: 25px;
+}
+.rowInfoFournisseur{
+  display: flex;
+  flex-direction: row;
+  padding-left: 15px;
+  margin-bottom: 20px;
+}
+.tableHeaderTicket {
+  min-height: 54px;
+  margin: 0px 28px 15px 28px;
+  padding: 0px 115px 0px 45px;
+  border-radius: 7px;
+  background-color: var(--Dark-color-300);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.tableHeaderTicket >p,.tableRowticket >p ,.rowInfoFournisseur >p{
+  flex:1;
+}
+
+.tableHeaderTicket > p:nth-child(1),.tableRowticket > p:nth-child(1) {
+  flex-grow: 1.2;
+}
+
+.tableHeaderTicket > p:nth-child(2),.tableRowticket > p:nth-child(2) {
+  flex-grow: 0.7;
+}
+
+.tableHeaderTicket > p:nth-child(3),.tableRowticket > p:nth-child(3) {
+  flex-grow: 0.7;
+}
+
+.tableHeaderTicket > p:nth-child(4),.tableRowticket > p:nth-child(4) {
+  flex-grow: 1.2;
+}
+
+.tableHeaderTicket > p:nth-child(5),.tableRowticket > p:nth-child(5) {
+  flex-grow: 1.2;
+}
+
+.tableHeaderTicket > p:nth-child(6),.tableRowticket > p:nth-child(6) {
+  flex-grow: 1.2;
 }

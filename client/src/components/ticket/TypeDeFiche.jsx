@@ -4,7 +4,6 @@ import "../../assets/styles/modal.css";
 function TypeDeFiche({ display, setTypeDeFiche, setCree_fiche_preventive, setDonnees_des_fiches}) {
   const display_fiche_preventive = () => {
     setTypeDeFiche(false);
-    setTypeDeFiche(true);
     setCree_fiche_preventive(true);
     setDonnees_des_fiches(false);
   }

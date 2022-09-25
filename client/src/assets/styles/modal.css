@@ -24,10 +24,9 @@
   box-shadow: 0px 0px 5px 2px rgba(0, 0, 0, 0.5);
 }
 .modal_type_de_fiche {
-  padding: 0px;
-  padding-top: 63px;
-  width: 500px;
-  height: 177px;
+  padding: 52px 8px 0px 0px;
+  width: 411px;
+  height: 146px;
 }
 .modal-title {
   text-align: center;
@@ -50,7 +49,7 @@
 
 .typedefiche_modal_body h3 {
   color: #FFF;
-  font-size: 30px;
+  font-size: 26px;
   cursor: pointer;
   flex: 1;
   text-align: center;

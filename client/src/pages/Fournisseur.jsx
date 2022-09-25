@@ -23,7 +23,8 @@ function Fournisseur() {
 
   useEffect(() => {
     fournisseurStore.loadFournisseurs().then(() => 
-      setRowsData(fournisseurStore.fournisseurs)
+      {setRowsData(fournisseurStore.fournisseurs);
+        console.log(rowsData);}
     )
   }, []);
 

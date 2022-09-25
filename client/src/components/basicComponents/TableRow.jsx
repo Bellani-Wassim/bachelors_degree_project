@@ -6,7 +6,7 @@ import DropDownOptions from './DropDownOptions';
 import { observer } from "mobx-react";
 import { APIStoreContext } from '../../APIStoreContext';
 
-function TableRow({rows_data_displayed, page}) {
+function TableRow({rows_data_displayed, page, setDownload, setIndexDownload}) {
 
   const { fournisseurStore, plateformeStore } = useContext(APIStoreContext);
 
@@ -16,6 +16,10 @@ function TableRow({rows_data_displayed, page}) {
 
 
   const displayClickOption = (index) => {
+    if ((page =="ticket") && (typeof index !== "undefined")) {
+      setIndexDownload(index);
+      console.log("index fdsfq= "+ index);
+    }
     setDropdown((prev) => {
         return prev === index ? null : index;
     });
@@ -33,6 +37,21 @@ function TableRow({rows_data_displayed, page}) {
             <p>{data.nom}</p>
             <p>{data.email}</p>
             <p>{data.adresse}</p>
+        </>)
+      case "ticket":
+        let type;
+          if (data.severite_equip) {
+            type = "curative";
+          }else {
+            type = "preventive"
+          }
+        return(<>
+            <p>{type}</p>
+            <p>{data.id_ticket}</p>
+            <p>{data.etat_ticket ? "ouvert" : "fermee"}</p>
+            <p>{data.periode_ticket}</p>
+            <p>{data.id_fournisseur}</p>
+            <p>{data.id_technicien}</p>
         </>)
       case "technicien":
         return(<>
@@ -111,7 +130,6 @@ function TableRow({rows_data_displayed, page}) {
       }      
   }
 
-
   useEffect(() => {
     fournisseurStore.loadFournisseurs();
     plateformeStore.loadPlateformes();
@@ -119,19 +137,21 @@ function TableRow({rows_data_displayed, page}) {
 
   return (<>
           {rows_data_displayed.map((data,index)=>{      
-          return(<div key={data.id || data.num_serie}>
+          return(<div key={data.id || data.num_serie || data.id_ticket}>
           <div className={classTableRow} > 
             {arrowMoreDisplay(page,index)}
             {displayRow(data,page)}
             <div className='dropDown'>
               <img className='threeDotsIcon' src={threeDots} alt='' onClick={()=>displayClickOption(index)}/>
-              <div className='dropDownMenu' style={{ display: dropDown === index ? 'block' : 'none' }}>
+              <div className='dropDownMenu' style={{ display: dropDown === index ? 'block' : 'none' }} >
                     <DropDownOptions 
                       rows_data_displayed={rows_data_displayed} 
                       idx={index} 
                       displayClickOption={displayClickOption}
                       page={page}
-                      setArrowId={setArrowId}/>
+                      setArrowId={setArrowId}
+                      setDownload={setDownload}
+                      setIndexDownload={setIndexDownload}/>
               </div>    
             </div>
           </div>

@@ -1,11 +1,11 @@
-import React, { useState, useContext }  from 'react'
+import React, { useState, useContext, useEffect }  from 'react'
 import ModifierFournisseur from '../fournisseur/ModifierFournisseur';
 import ModifierTechnicien from '../technicien/ModifierTechnicien';
 import ModifierPlateforme from '../plateforme/ModifierPlateforme';
 import ModifierEquipement from '../equipement/ModifierEquipement';
 import { APIStoreContext } from '../../APIStoreContext';
 
-export default function DropDownOptions({ rows_data_displayed, idx, displayClickOption, page, setArrowId}) {
+export default function DropDownOptions({ rows_data_displayed, idx, displayClickOption, page, setArrowId,setDownload, setIndexDownload}) {
 
   const [ModifierModalDisplay, setModifierModalDisplay] = useState(false);  
 
@@ -90,10 +90,20 @@ export default function DropDownOptions({ rows_data_displayed, idx, displayClick
       )
     }
   }
+
+  const download = () => {
+    setDownload(true); 
+    setIndexDownload(idx);
+    setArrowId(null);
+    displayClickOption();
+  }
+  
   return (
         <>
-          <button className='dropDownOption' onClick={() => editRow()}>Modifier</button>
+          {(page =="ticket") ?<><button className='dropDownOption' onClick={() => editRow()}>afficher</button>
+          <button className='dropDownOption' onClick={() => download()}>telecharger</button></> : <></>}
           <button className='dropDownOption' onClick={() => deleteRow()}>Supprimer</button>
+          <button className='dropDownOption' onClick={() => editRow()}>Modifier</button>
           {displayModifierModal()}
         </>
   )

@@ -1,50 +1,31 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useState } from 'react';
 import {ReImg} from 'reimg'
+import { observer } from "mobx-react";
+import { APIStoreContext } from "../../APIStoreContext";
 import ticket from '../../assets/images/fiche_dintervention.jpg'
 import "../../assets/styles/ficheDinterventionGenerator.css"
-import ticket_telecharge from '../../assets/images/fiche_dintervention_telecharge.jpg'
+import ticket_telecharge from '../../assets/images/fiche_dintervention.jpg'
 import more from '../../assets/images/plus_icon.svg';
+import return_button from '../../assets/images/return_button.svg'
 import FichePreventiveRow from '../basicComponents/FichePreventiveRow';
 import { Button } from '../basicComponents';
 
-function Fichepreventive() {
-	const [loaded, setLoaded] = useState(false);
+function Fichepreventive({setCree_fiche_preventive, setDonnees_des_fiches, download, setDownload, indexDownload, setA}) {
+	const [array, setArray] = useState([]);
 	const [apercu, set_apercu] = useState(false);
-	const [checked_curative, set_checked_curative] = useState(false);
-	const [checked_preventive, set_checked_preventive] = useState(false);
 	const [input_numero_ticket, set_input_numero_ticket] = useState("");
-	const [input_trimestre, set_input_trimestre] = useState("");
-	const [input_annee, set_input_annee] = useState("");
-	const [checked_ticket_ouvert, set_checked_ticket_ouvert] = useState(false);
+	const [input_periode, set_input_periode] = useState("fqsd");
+	const [checked_ticket_ouvert, set_checked_ticket_ouvert] = useState(true);
 	const [checked_ticket_ferme, set_checked_ticket_ferme] = useState(false);
 	const [input_site, set_input_site] = useState("");
-	const [input_date_heure_signalisation, set_input_date_heure_signalisation] = useState("");
-	const [input_date_heure_reponse, set_input_date_heure_reponse] = useState("");
-	const [input_severite, set_input_severite] = useState("");
-	const [input_temp_restoration, set_input_temp_restoration] = useState("");
-	const [input_temp_resolution, set_input_temp_resolution] = useState("");
 	const [input_conclusion_generale, set_input_conclusion_generale] = useState("");
-	const [r_1, set_r_1] = useState("");
-	const [r_2, set_r_2] = useState("");
-	const [r_3, set_r_3] = useState("");
-	const [r_4, set_r_4] = useState("");
-	const [r_5, set_r_5] = useState("");
-	const [r_6, set_r_6] = useState("");
-	const [r_7, set_r_7] = useState("");
-	const [r_8, set_r_8] = useState("");
-	const [o_1, set_o_1] = useState("");
-	const [o_2, set_o_2] = useState("");
-	const [o_3, set_o_3] = useState("");
-	const [o_4, set_o_4] = useState("");
-	const [o_5, set_o_5] = useState("");
-	const [o_6, set_o_6] = useState("");
-	const [o_7, set_o_7] = useState("");
-	const [o_8, set_o_8] = useState("");
+  const { ticketStore } = useContext(APIStoreContext);
+  const [rowsData, setRowsData] = useState([]);
+	const [readyToDownload, setReadyToDownload] = useState(true);
 
 	const [input_nom_fournisseur, set_input_nom_fournisseur] = useState("");
-	const [input_nom_client, set_input_nom_client] = useState("");
-	const [input_commentaire_client, set_input_commentaire_client] = useState("");
+	const [input_nom_technicien, set_input_nom_technicien] = useState("");
 
 	const handle_checked_fiche = (fiche) => {
 		switch (fiche) {
@@ -67,36 +48,8 @@ function Fichepreventive() {
 		}
 	}
 
-	const long_text_area_fill = (context, input, width ,h1 , h2 , h3) => {
-		if (input) {
-			var parts = input.match(/[\s\S]{1,18}/g)
-			if (parts[0]) {
-				context.fillText(parts[0], width, h1);
-			} 
-			if (parts[1]) {
-				context.fillText(parts[1], width, h2);
-			} 
-			if (parts[2]) {
-				context.fillText(parts[2], width, h3);
-			}
-	  }
-	}
-
-	const text_area_fill = (context, input, width ,h1 , h2, h3) => {
-		if (input) {
-			var parts = input.match(/[\s\S]{1,12}/g)
-			if (parts[0]) {
-				context.fillText(parts[0], width, h1);
-			} 
-			if (parts[1]) {
-				context.fillText(parts[1], width, h2);
-			} 
-			if (parts[2]) {
-				context.fillText(parts[2], width, h3);
-			}}
-	}
-
   const showResult = () => {
+		  console.log("showing the result");
 			var canvas = document.getElementById('idCanvas');
 			var context = canvas.getContext('2d');
 		
@@ -106,147 +59,182 @@ function Fichepreventive() {
 			context.drawImage(imageObj, 0, 0);
 			context.fillStyle = "black";
 
-			context.font = "55px Calibri";
-
-			if (checked_curative) {
-				context.fillText("X", 1238, 468);
-			} else {
-				context.fillText("X", 829, 475);			
-			}
+			context.font = "48px Calibri";
 
 			if (checked_ticket_ouvert) {
-				context.fillText("X", 347, 568);
+				context.fillText("X", 464, 861);
 			} else if (checked_ticket_ferme) {
-				context.fillText("X", 518, 576);			
+				context.fillText("X", 669, 861);			
 			}
 
-			context.font = "28px Calibri";
+			context.font = "42px Calibri";
 
-			context.fillText(input_trimestre, 338, 490);
-			context.fillText(input_annee, 449, 491);
+			context.fillText(input_numero_ticket, 420, 622);
+			context.fillText(input_site, 256, 670);
+			context.fillText(input_nom_fournisseur, 415, 716);
+			context.fillText(input_nom_technicien, 400, 764);
+			context.fillText(input_periode, 317, 811);
 
-			context.font = "32px Calibri";
-			context.fillText(input_numero_ticket, 215, 558);
 
-			long_text_area_fill(context, input_site, 115, 828, 856, 884);
-			long_text_area_fill(context, input_date_heure_signalisation, 394, 828, 856, 884);
-			long_text_area_fill(context, input_date_heure_reponse, 700, 828, 856, 884);
-			context.fillText(input_severite, 1070, 832);
-			text_area_fill(context, input_temp_restoration, 1160, 830, 858, 886);
-			text_area_fill(context, input_temp_resolution, 1367, 830, 858, 886);
-
-			context.font = "25px Calibri";
-
-			context.fillText(r_1, 752, 1060);
-			context.fillText(r_2, 752, 1110);
-			context.fillText(r_3, 752, 1160);
-			context.fillText(r_4, 752, 1200);
-			context.fillText(r_5, 752, 1250);
-			context.fillText(r_6, 752, 1294);
-			context.fillText(r_7, 752, 1342);
-			context.fillText(r_8, 752, 1396);
-
-			context.fillText(o_1, 902, 1060);
-			context.fillText(o_2, 902, 1110);
-			context.fillText(o_3, 902, 1160);
-			context.fillText(o_4, 902, 1200);
-			context.fillText(o_5, 902, 1250);
-			context.fillText(o_6, 902, 1294);
-			context.fillText(o_7, 902, 1342);
-			context.fillText(o_8, 902, 1396);
-
-			context.font = "33px Calibri";
+			context.font = "41px Calibri";
 			if (input_conclusion_generale) {
-				var parts = input_conclusion_generale.match(/[\s\S]{1,105}/g)
+				var parts = input_conclusion_generale.match(/[\s\S]{1,80}/g)
 				if (parts[0]) {
-					context.fillText(parts[0], 110, 1490);
+					context.fillText(parts[0], 80, 1040);
 				} 
 				if (parts[1]) {
-					context.fillText(parts[1], 110, 1524);
+					context.fillText(parts[1], 80, 1080);
 				} 
 				if (parts[2]) {
-					context.fillText(parts[2], 110, 1558);
+					context.fillText(parts[2], 80, 1120);
 				}
 				if (parts[3]) {
-					context.fillText(parts[3], 110, 1592);
+					context.fillText(parts[3], 80, 1160);
 				}
 				if (parts[4]) {
-					context.fillText(parts[4], 110, 1626);
+					context.fillText(parts[4], 80, 1200);
 				}}
+				context.font = "36px Calibri";
+				array.map((item, index) => {
+					context.fillText(item.nom_equipement, 30, 1463+index*63);
+					context.fillText(item.type_model, 439, 1463+index*63);
+					context.fillText(item.num_serie, 747, 1463+index*63);
+					context.fillText(item.etat, 1005, 1463+index*63);
+					context.fillText(item.observation, 1169, 1463+index*63);
+				})
 
-				context.font = "32px Calibri";
-				if (input_commentaire_client) {
-					var parts = input_commentaire_client.match(/[\s\S]{1,37}/g)
-					if (parts[0]) {
-						context.fillText(parts[0], 665, 1919);
-					} 
-					if (parts[1]) {
-						context.fillText(parts[1], 665, 1953);
-					} 
-					if (parts[2]) {
-						context.fillText(parts[2], 665, 1987);
-					}
-					if (parts[3]) {
-						context.fillText(parts[3], 665, 2021);
-					}
-					if (parts[4]) {
-						context.fillText(parts[4], 665, 2055);
-					}}
+				context.strokeStyle = 'black';
+				context.lineWidth = 3;
 
-					context.font = "34px Calibri";
-					context.fillText(input_nom_fournisseur, 178, 1919);
-					context.fillText(input_nom_client, 1262, 1917);
+				context.beginPath();
+				for (let i = 0; i < array.length; i++) {	
+					context.moveTo(23.5, 1417+i*63);
+					context.lineTo(23.5, 1480+i*63);
+
+					context.moveTo(432, 1417+i*63);
+					context.lineTo(432, 1480+i*63);
+
+					context.moveTo(740.5, 1417+i*63);
+					context.lineTo(740.5, 1480+i*63);
+
+					context.moveTo(998.5, 1417+i*63);
+					context.lineTo(998.5, 1480+i*63);
+
+					context.moveTo(1162.5, 1417+i*63);
+					context.lineTo(1162.5, 1480+i*63);
+
+					context.moveTo(1604, 1480+i*63);
+					context.lineTo(23, 1480+i*63);
+
+					context.moveTo(1603, 1417+i*63);
+					context.lineTo(1603, 1480+i*63);
+				}
+				context.stroke();
+				set_apercu(true);
 		}
+		
 		imageObj.setAttribute('crossOrigin', 'anonymous');
 		imageObj.src = ticket_telecharge;
-		set_apercu(true);
-		return;
+		
+		return false;
 	}
-
 	const telecharger = () => {
 		ReImg.fromCanvas(document.getElementById('idCanvas')).downloadPng();
-		set_apercu(false);
 	}
 
-	return (
-		<div className='ticket_container_ag' style={!loaded ? { display: 'block' } : { display: 'none' }}>
+	const add_row = () => {
+		if (array.length<14) {
+			setArray([...array,  
+				{nom_equipement: "",
+				type_model: "" ,
+				num_serie: "",
+				etat: "" ,
+				observation: "" }]);
+		}
+	}
 
-			<div className='ticket'>
-				{!apercu &&
-				<>
-				<img src={ticket} id="ticket" alt="ticket" onload={() => setLoaded(true)}></img>
+  useEffect(() => {
+    if (download) {
+      showResult(true);
+			telecharger();
+			setDownload(false);
+    }
+  }, [download]);
 
-				<input type="checkbox" className='ticket_ouvert' checked={checked_ticket_ouvert} onClick={() => handle_checked_fiche("ouvert")}/>
-				<input type="checkbox" className='ticket_ferme' checked={checked_ticket_ferme} onClick={() => handle_checked_fiche("ferme")}/> 
-
-				<input type="text" className='num_ticket' maxLength="25" onChange={(e) => set_input_numero_ticket(e.target.value)}/>
-				<input type="text" className='id_site' maxLength="25" onChange={(e) => set_input_numero_ticket(e.target.value)}/>
-				<input type="text" className='id_fournisseur' maxLength="25" onChange={(e) => set_input_numero_ticket(e.target.value)}/>
-				<input type="text" className='id_technicien' maxLength="25" onChange={(e) => set_input_numero_ticket(e.target.value)}/>
-				<input type="text" className='periode' maxLength="25" onChange={(e) => set_input_numero_ticket(e.target.value)}/>
-
-				<FichePreventiveRow index={0}/>
-				<FichePreventiveRow index={1}/>
-				<FichePreventiveRow index={2}/>
-				<FichePreventiveRow index={3}/>
-				<FichePreventiveRow index={4}/>
-				<FichePreventiveRow index={5}/>
-
-				<img src={more} id="more_equipement" alt="add"></img>
-				<textarea className='conclusion_generale_ticket' wrap="hard" maxLength="1100" defaultValue={input_conclusion_generale} onChange={(e) => set_input_conclusion_generale(e.target.value)}/>
-				</>}
-				<canvas id="idCanvas" width="1765" height="2463" className={!apercu ? 'display_none': ''}></canvas>
-
-			</div>
-			{!apercu && <Button onClick={() => showResult()} id="preview_button">apercu</Button>}
-			{apercu && 
-				<div className='button_container'>
-					<Button onClick={() => set_apercu(false)}>modifier</Button>
-					<Button onClick={() => telecharger()}>telecharger</Button>
-				</div>
+	useEffect(() => {
+    if (typeof indexDownload !== "undefined" || indexDownload >-1) {
+			console.log("clicked");
+			setReadyToDownload(false);
+			setArray(rowsData[indexDownload].equip_ursi);
+			set_input_numero_ticket(rowsData[indexDownload].id_ticket);
+			set_input_periode(rowsData[indexDownload].periode_ticket);
+			if (rowsData[indexDownload].etat_ticket) {
+				set_checked_ticket_ouvert(true);
+			}else {
+				set_checked_ticket_ferme(true);
 			}
+			set_input_site(rowsData[indexDownload].id_site);
+			set_input_conclusion_generale(rowsData[indexDownload].conclusion_general);
+			set_input_nom_fournisseur(rowsData[indexDownload].id_fournisseur);
+			set_input_nom_technicien(rowsData[indexDownload].id_technicien);
+			setReadyToDownload(true);
+			showResult(); 
+			setA(true);
+    }
+  }, [indexDownload]);
+  
+	useEffect(() => {
+		console.log("dans le useeffect");
+
+		ticketStore.loadTickets().then(() => 
+		setRowsData(ticketStore.tickets));
+		
+		if (array.length==0) {
+			add_row();
+		}
+
+		showResult();
+  }, []);
+
+	return (
+		<div className='ticket_container_ag' >
+
+			{readyToDownload && <div className='ticket'>
+				{apercu && 
+					<div className='button_container'>
+						<Button onClick={() => set_apercu(false)}>modifier</Button>
+						<Button onClick={() => telecharger()}>telecharger</Button>
+					</div>
+				}
+				{!apercu &&
+					<>
+					<img src={ticket} id="ticket" alt="ticket"></img>
+
+					<input type="checkbox" className='ticket_ouvert' checked={checked_ticket_ouvert} onChange={() => handle_checked_fiche("ouvert")}/>
+					<input type="checkbox" className='ticket_ferme' checked={checked_ticket_ferme} onChange={() => handle_checked_fiche("ferme")}/> 
+
+					<input type="text" className='num_ticket' maxLength="22" defaultValue={input_numero_ticket} onChange={(e) => set_input_numero_ticket(e.target.value)}/>
+					<input type="text" className='id_site' maxLength="25" defaultValue={input_site} onChange={(e) => set_input_site(e.target.value)}/>
+					<input type="text" className='id_fournisseur' maxLength="21" defaultValue={input_nom_fournisseur} onChange={(e) => set_input_nom_fournisseur(e.target.value)}/>
+					<input type="text" className='id_technicien' maxLength="23" defaultValue={input_nom_technicien} onChange={(e) => set_input_nom_technicien(e.target.value)}/>
+					<input type="text" className='periode' maxLength="23" defaultValue={input_periode} onChange={(e) => set_input_periode(e.target.value)}/>
+
+					<img src={more} id="more_equipement" alt="add" onClick={() => add_row()}></img>
+					<textarea className='conclusion_generale_ticket' wrap="hard" maxLength="362" defaultValue={input_conclusion_generale} onChange={(e) => set_input_conclusion_generale(e.target.value)}/>
+					{
+						array.map((object , i) => {
+							return <FichePreventiveRow index={i} array={array} setArray={setArray}/>
+						})	
+					}
+					</>
+				}
+				 
+				<canvas id="idCanvas" width="1765" height="2463"  ></canvas>
+			</div>}
+			<img src={return_button} id="return_button" alt="add" onClick={() =>{setCree_fiche_preventive(false);setDonnees_des_fiches(true) ;} }></img>			
+			{!apercu && <Button onClick={() => showResult()} id="preview_button">apercu</Button>}
 		</div>
 	);
 }
 
-export default Fichepreventive;
+export default observer(Fichepreventive);

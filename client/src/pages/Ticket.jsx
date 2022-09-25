@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from "react";
 import { Button } from "../components/basicComponents";
 import TypeDeFiche from "../components/ticket/TypeDeFiche";
 import { observer } from "mobx-react";
-import "../assets/styles/fournisseur.css";
+import "../assets/styles/ficheDinterventionGenerator.css";
 import { APIStoreContext } from "../APIStoreContext";
 import SearchInput from "../components/SearchInput";
 import TableRow from "../components/basicComponents/TableRow";
@@ -13,20 +13,23 @@ function Ticket() {
   const [cree_fiche_preventive, setCree_fiche_preventive] = useState(false);
   const [donnees_des_fiches, setDonnees_des_fiches] = useState(true);
   const [searchText, setSearchText] = useState();
-  const { fournisseurStore, socketStore } = useContext(APIStoreContext);
+  const [indexDownload, setIndexDownload] = useState();
+  const { ticketStore, socketStore } = useContext(APIStoreContext);
+  const [download, setDownload] = useState(false);
+  const [a, setA] = useState(false);
 
   const [rowsData, setRowsData] = useState([]);
   const [rowsDataDisplayed, setRowsDataDisplayed]=useState(rowsData) ;
 
-  socketStore.socket.on("mettre_a_jour_fournisseur",() => {
-    fournisseurStore.loadFournisseurs().then(() => 
-      setRowsData(fournisseurStore.fournisseurs)
+  socketStore.socket.on("mettre_a_jour_ticket",() => {
+    ticketStore.loadTickets().then(() => 
+      setRowsData(ticketStore.tickets)
     )
   })
 
   useEffect(() => {
-    fournisseurStore.loadFournisseurs().then(() => 
-      setRowsData(fournisseurStore.fournisseurs)
+    ticketStore.loadTickets().then(() => 
+      setRowsData(ticketStore.tickets)
     )
   }, []);
 
@@ -37,9 +40,9 @@ function Ticket() {
 
   const onchangeSearchInput = (searchText) => {
     const filtere = rowsData.filter(element => {
-      return element.id.toLowerCase().includes(searchText.toLowerCase())
-      ||element.nom.toLowerCase().includes(searchText.toLowerCase())
-      ||element.email.toLowerCase().includes(searchText.toLowerCase())
+      return element.id_ticket.toLowerCase().includes(searchText.toLowerCase())
+      ||element.id_fournisseur.toLowerCase().includes(searchText.toLowerCase())
+      ||element.id_technicien.toLowerCase().includes(searchText.toLowerCase())
      })
     setSearchText(searchText);
     setRowsDataDisplayed(filtere);
@@ -58,23 +61,36 @@ function Ticket() {
 							setDonnees_des_fiches={setDonnees_des_fiches}
 							setCree_fiche_preventive={setCree_fiche_preventive}/>
               <SearchInput 
-              searchParams={["fiche", "email"]}
+              searchParams={["fiche", "ticket"]}
               onChange={(e) => onchangeSearchInput(e.target.value)}/>
             </div>
-            <div className="tableHeaderFournisseur">
-                <p>Id</p>
-                <p>Nom</p>
-                <p>Email</p>
-                <p>Adresse</p>
+            <div className="tableHeaderTicket">
+                <p>Fiche</p>
+                <p>Ticket</p>
+                <p>Etat</p>
+                <p>Periode</p>
+                <p>Fournisseur</p>
+                <p>Technicien</p>
               </div>
               <div className="tableBody">
                 <TableRow 
                 rows_data_displayed={rowsDataDisplayed} 
-                page="fournisseur"/>
+                page="ticket"
+                setIndexDownload={setIndexDownload}
+                setDownload={setDownload}/>
               </div>
           </div>
 					}
-					{cree_fiche_preventive && <Fichepreventive />}
+          <div style={{ display: cree_fiche_preventive ? 'block' : 'none' }}>
+          <Fichepreventive 
+            setCree_fiche_preventive={setCree_fiche_preventive} 
+            setDonnees_des_fiches={setDonnees_des_fiches}
+            download={download}
+            setDownload={setDownload}
+            rowsData={rowsDataDisplayed}
+            setA={setA}
+            indexDownload={indexDownload}/>
+          </div> 
 
       </>
     );
