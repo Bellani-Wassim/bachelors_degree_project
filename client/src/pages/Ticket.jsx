@@ -19,6 +19,8 @@ function Ticket() {
   const [a, setA] = useState(false);
 
   const [rowsData, setRowsData] = useState([]);
+  const [modifier, set_modifier] = useState(false);
+  const [afficher, set_afficher] = useState(false);
   const [rowsDataDisplayed, setRowsDataDisplayed]=useState(rowsData) ;
 
   socketStore.socket.on("mettre_a_jour_ticket",() => {
@@ -37,6 +39,20 @@ function Ticket() {
     setRowsDataDisplayed(rowsData);
     setSearchText("");
   }, [rowsData]);
+
+  useEffect(() => {
+    if (afficher) {
+      setCree_fiche_preventive(true);
+      setDonnees_des_fiches(false);
+    }
+  }, [afficher]);
+
+  useEffect(() => {
+    if (modifier) {
+      setCree_fiche_preventive(true);
+      setDonnees_des_fiches(false);
+    }
+  }, [modifier]);
 
   const onchangeSearchInput = (searchText) => {
     const filtere = rowsData.filter(element => {
@@ -76,6 +92,8 @@ function Ticket() {
                 <TableRow 
                 rows_data_displayed={rowsDataDisplayed} 
                 page="ticket"
+                set_afficher={set_afficher}
+                set_modifier={set_modifier}
                 setIndexDownload={setIndexDownload}
                 setDownload={setDownload}/>
               </div>
@@ -87,9 +105,15 @@ function Ticket() {
             setDonnees_des_fiches={setDonnees_des_fiches}
             download={download}
             setDownload={setDownload}
-            rowsData={rowsDataDisplayed}
+            rowsData={rowsData}
             setA={setA}
-            indexDownload={indexDownload}/>
+            indexDownload={indexDownload}
+            typeDeFiche={typeDeFiche}
+            set_afficher={set_afficher}
+            afficher={afficher}
+            set_modifier={set_modifier}
+            modifier={modifier}
+            />
           </div> 
 
       </>

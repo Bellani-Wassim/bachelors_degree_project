@@ -462,14 +462,14 @@
 
 .button_container button:nth-child(1) {
   position: absolute;
-  margin-left: 820px;
-  top : 17px;
+  margin-left: 856px;
+  top : -48px;
 }
 
 .button_container button:nth-child(2) {
   position: absolute;
-  margin-left: 926px;
-  top : 17px;
+  margin-left: 960px;
+  top: -48px;
 }
 
 .button_container button{

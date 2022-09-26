@@ -7,7 +7,9 @@ class TicketStore {
 			tickets: observable,
 			setTickets: action,
 			loadTickets: action,
-			addTickets: action,
+			deleteTicket: action,
+			updateTickets: action,
+			addTickets: action
 		});
 	}
 
@@ -24,24 +26,23 @@ class TicketStore {
 			.catch((error) => console.error(error));
 	}
 
-	addTickets(equipement) {
+	addTickets(ticket) {
 		return axios
-			.post('http://localhost:3546/api/equipement', equipement)
+			.post('http://localhost:3546/api/fiche_preventive', ticket)
 			.then((error) => console.error(error));
 	}
 
-	// updateEquipement(equipement) {
-	// 	axios
-	// 	 .post('http://localhost:3546/api/equipement/update', equipement)
-	// 	 .then((error) => console.error(error));
-	// }
+	updateTickets(ticket) {
+		axios
+		 .put('http://localhost:3546/api/fiche_preventive/update', ticket)
+		 .then((error) => console.error(error));
+	}
 
-	// deleteEquipement(id) {
-	// 	axios
-	// 		.post('http://localhost:3546/api/equipement/delete', {id})
-	// 		.then((error) => console.error(error));
-	// }
-
+	deleteTicket(id) {
+		axios
+			.put('http://localhost:3546/api/fiche_preventive/delete', {id})
+			.then((error) => console.error(error));
+	}
 }
 
 export default new TicketStore();

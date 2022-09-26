@@ -6,7 +6,7 @@ import DropDownOptions from './DropDownOptions';
 import { observer } from "mobx-react";
 import { APIStoreContext } from '../../APIStoreContext';
 
-function TableRow({rows_data_displayed, page, setDownload, setIndexDownload}) {
+function TableRow({rows_data_displayed, page, setDownload, setIndexDownload, set_afficher, set_modifier}) {
 
   const { fournisseurStore, plateformeStore } = useContext(APIStoreContext);
 
@@ -151,7 +151,9 @@ function TableRow({rows_data_displayed, page, setDownload, setIndexDownload}) {
                       page={page}
                       setArrowId={setArrowId}
                       setDownload={setDownload}
-                      setIndexDownload={setIndexDownload}/>
+                      set_modifier={set_modifier}
+                      setIndexDownload={setIndexDownload}
+                      set_afficher={set_afficher}/>
               </div>    
             </div>
           </div>

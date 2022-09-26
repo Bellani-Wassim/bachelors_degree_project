@@ -5,11 +5,11 @@ import ModifierPlateforme from '../plateforme/ModifierPlateforme';
 import ModifierEquipement from '../equipement/ModifierEquipement';
 import { APIStoreContext } from '../../APIStoreContext';
 
-export default function DropDownOptions({ rows_data_displayed, idx, displayClickOption, page, setArrowId,setDownload, setIndexDownload}) {
+export default function DropDownOptions({ rows_data_displayed, idx, displayClickOption, page, setArrowId,setDownload, setIndexDownload, set_afficher, set_modifier}) {
 
   const [ModifierModalDisplay, setModifierModalDisplay] = useState(false);  
 
-  const { fournisseurStore, technicienStore, plateformeStore, equipementStore, socketStore } = useContext(APIStoreContext);
+  const { fournisseurStore, technicienStore, plateformeStore, equipementStore, ticketStore, socketStore } = useContext(APIStoreContext);
 
   const editRow = () => {
     setModifierModalDisplay(true);
@@ -41,6 +41,13 @@ export default function DropDownOptions({ rows_data_displayed, idx, displayClick
         const equipement_id = rows_data_displayed[idx].num_serie;
         equipementStore.deleteEquipement(equipement_id)
         socketStore.socket.emit('equipements_a_changee');
+        setArrowId(null);
+        displayClickOption();
+        return;
+      case "ticket":
+        const ticket_id = rows_data_displayed[idx].id_ticket;
+        ticketStore.deleteTicket(ticket_id)
+        socketStore.socket.emit('tickets_a_changee');
         setArrowId(null);
         displayClickOption();
         return;
@@ -100,10 +107,10 @@ export default function DropDownOptions({ rows_data_displayed, idx, displayClick
   
   return (
         <>
-          {(page =="ticket") ?<><button className='dropDownOption' onClick={() => editRow()}>afficher</button>
+          {(page =="ticket") ?<><button className='dropDownOption' onClick={() => set_afficher(true)}>afficher</button>
           <button className='dropDownOption' onClick={() => download()}>telecharger</button></> : <></>}
           <button className='dropDownOption' onClick={() => deleteRow()}>Supprimer</button>
-          <button className='dropDownOption' onClick={() => editRow()}>Modifier</button>
+          <button className='dropDownOption' onClick={() => {(page =="ticket") ? set_modifier(true) : editRow()}}>Modifier</button>
           {displayModifierModal()}
         </>
   )

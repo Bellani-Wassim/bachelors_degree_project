@@ -16,7 +16,6 @@ import {
 	Equipement,
 	Contrat,
 	Plateforme,
-	FicheDinterventionGenerator,
 } from './pages';
 
 function App() {
@@ -44,8 +43,6 @@ function App() {
 					<Route path="/contrats" element={<Contrat />} />
 
 					<Route path="/plateformes" element={<Plateforme />} />
-
-					<Route path="/FicheDintervetionGenerator" element={<FicheDinterventionGenerator /> } />
 
 					<Route path="/Ticket" element={<Ticket /> } />
 

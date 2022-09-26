@@ -11,17 +11,16 @@ import return_button from '../../assets/images/return_button.svg'
 import FichePreventiveRow from '../basicComponents/FichePreventiveRow';
 import { Button } from '../basicComponents';
 
-function Fichepreventive({setCree_fiche_preventive, setDonnees_des_fiches, download, setDownload, indexDownload, setA}) {
+function Fichepreventive({set_afficher, typeDeFiche, setCree_fiche_preventive, setDonnees_des_fiches, download, setDownload, indexDownload, setA, rowsData,afficher, set_modifier, modifier}) {
 	const [array, setArray] = useState([]);
 	const [apercu, set_apercu] = useState(false);
 	const [input_numero_ticket, set_input_numero_ticket] = useState("");
-	const [input_periode, set_input_periode] = useState("fqsd");
+	const [input_periode, set_input_periode] = useState("");
 	const [checked_ticket_ouvert, set_checked_ticket_ouvert] = useState(true);
 	const [checked_ticket_ferme, set_checked_ticket_ferme] = useState(false);
 	const [input_site, set_input_site] = useState("");
 	const [input_conclusion_generale, set_input_conclusion_generale] = useState("");
   const { ticketStore } = useContext(APIStoreContext);
-  const [rowsData, setRowsData] = useState([]);
 	const [readyToDownload, setReadyToDownload] = useState(true);
 
 	const [input_nom_fournisseur, set_input_nom_fournisseur] = useState("");
@@ -130,7 +129,6 @@ function Fichepreventive({setCree_fiche_preventive, setDonnees_des_fiches, downl
 					context.lineTo(1603, 1480+i*63);
 				}
 				context.stroke();
-				set_apercu(true);
 		}
 		
 		imageObj.setAttribute('crossOrigin', 'anonymous');
@@ -138,8 +136,36 @@ function Fichepreventive({setCree_fiche_preventive, setDonnees_des_fiches, downl
 		
 		return false;
 	}
+
 	const telecharger = () => {
-		ReImg.fromCanvas(document.getElementById('idCanvas')).downloadPng();
+		if (modifier) {
+			ticketStore.updateTickets({
+				id_ticket:input_numero_ticket,
+				id_site:input_site,
+				id_fournisseur:input_nom_fournisseur,
+				id_technicien:input_nom_technicien,
+				periode_ticket:input_periode,
+				etat_ticket:checked_ticket_ouvert,
+				conclusion_general:input_conclusion_generale,
+				equip_ursi:array
+			});
+			return_to_main();
+		} else {
+			ReImg.fromCanvas(document.getElementById('idCanvas')).downloadPng();
+			if (!download) {
+				ticketStore.addTickets({
+					id_ticket:input_numero_ticket,
+					id_site:input_site,
+					id_fournisseur:input_nom_fournisseur,
+					id_technicien:input_nom_technicien,
+					periode_ticket:input_periode,
+					etat_ticket:checked_ticket_ouvert,
+					conclusion_general:input_conclusion_generale,
+					equip_ursi:array
+				});
+			}
+		}
+		set_apercu(false);
 	}
 
 	const add_row = () => {
@@ -161,10 +187,122 @@ function Fichepreventive({setCree_fiche_preventive, setDonnees_des_fiches, downl
     }
   }, [download]);
 
+	const showResultForDownload = () => {
+		console.log("showing the result");
+			var canvas = document.getElementById('idCanvas');
+			var context = canvas.getContext('2d');
+		
+			var imageObj = new Image();
+
+			imageObj.onload = function() {
+			context.drawImage(imageObj, 0, 0);
+			context.fillStyle = "black";
+
+			context.font = "48px Calibri";
+
+			if (rowsData[indexDownload].etat_ticket) {
+				context.fillText("X", 464, 861);
+			} else {
+				context.fillText("X", 669, 861);			
+			}
+
+			context.font = "42px Calibri";
+
+			context.fillText(rowsData[indexDownload].id_ticket, 420, 622);
+			context.fillText(rowsData[indexDownload].id_site, 256, 670);
+			context.fillText(rowsData[indexDownload].id_fournisseur, 415, 716);
+			context.fillText(rowsData[indexDownload].id_technicien, 400, 764);
+			context.fillText(rowsData[indexDownload].periode_ticket, 317, 811);
+
+
+			context.font = "41px Calibri";
+			if (rowsData[indexDownload].conclusion_general) {
+				var parts = rowsData[indexDownload].conclusion_general.match(/[\s\S]{1,80}/g)
+				if (parts[0]) {
+					context.fillText(parts[0], 80, 1040);
+				} 
+				if (parts[1]) {
+					context.fillText(parts[1], 80, 1080);
+				} 
+				if (parts[2]) {
+					context.fillText(parts[2], 80, 1120);
+				}
+				if (parts[3]) {
+					context.fillText(parts[3], 80, 1160);
+				}
+				if (parts[4]) {
+					context.fillText(parts[4], 80, 1200);
+				}}
+				context.font = "36px Calibri";
+				rowsData[indexDownload].equip_ursi.map((item, index) => {
+					context.fillText(item.nom_equipement, 30, 1463+index*63);
+					context.fillText(item.type_model, 439, 1463+index*63);
+					context.fillText(item.num_serie, 747, 1463+index*63);
+					context.fillText(item.etat, 1005, 1463+index*63);
+					context.fillText(item.observation, 1169, 1463+index*63);
+				})
+
+				context.strokeStyle = 'black';
+				context.lineWidth = 3;
+
+				context.beginPath();
+				for (let i = 0; i < rowsData[indexDownload].equip_ursi.length; i++) {	
+					context.moveTo(23.5, 1417+i*63);
+					context.lineTo(23.5, 1480+i*63);
+
+					context.moveTo(432, 1417+i*63);
+					context.lineTo(432, 1480+i*63);
+
+					context.moveTo(740.5, 1417+i*63);
+					context.lineTo(740.5, 1480+i*63);
+
+					context.moveTo(998.5, 1417+i*63);
+					context.lineTo(998.5, 1480+i*63);
+
+					context.moveTo(1162.5, 1417+i*63);
+					context.lineTo(1162.5, 1480+i*63);
+
+					context.moveTo(1604, 1480+i*63);
+					context.lineTo(23, 1480+i*63);
+
+					context.moveTo(1603, 1417+i*63);
+					context.lineTo(1603, 1480+i*63);
+				}
+				context.stroke();
+				set_apercu(true);
+		}
+		
+		imageObj.setAttribute('crossOrigin', 'anonymous');
+		imageObj.src = ticket_telecharge;
+		
+		return false;
+	}
+
+	const return_to_main = () => {
+		setCree_fiche_preventive(false);
+		setDonnees_des_fiches(true);
+		set_apercu(false);
+		set_afficher(false);
+		set_modifier(false);
+	}
+
 	useEffect(() => {
     if (typeof indexDownload !== "undefined" || indexDownload >-1) {
-			console.log("clicked");
-			setReadyToDownload(false);
+			setReadyToDownload(true);
+			showResultForDownload(); 
+			setA(true);
+    }
+  }, [indexDownload]);
+
+	useEffect(() => {
+    if (afficher) {
+			set_apercu(true);
+		}
+  }, [afficher]);
+
+	useEffect(() => {
+    if (modifier) {
+			set_apercu(false);
 			setArray(rowsData[indexDownload].equip_ursi);
 			set_input_numero_ticket(rowsData[indexDownload].id_ticket);
 			set_input_periode(rowsData[indexDownload].periode_ticket);
@@ -177,33 +315,45 @@ function Fichepreventive({setCree_fiche_preventive, setDonnees_des_fiches, downl
 			set_input_conclusion_generale(rowsData[indexDownload].conclusion_general);
 			set_input_nom_fournisseur(rowsData[indexDownload].id_fournisseur);
 			set_input_nom_technicien(rowsData[indexDownload].id_technicien);
-			setReadyToDownload(true);
-			showResult(); 
-			setA(true);
-    }
-  }, [indexDownload]);
+		}
+  }, [modifier]);
   
-	useEffect(() => {
-		console.log("dans le useeffect");
 
-		ticketStore.loadTickets().then(() => 
-		setRowsData(ticketStore.tickets));
-		
+	useEffect(() => {
+		if (!modifier) {
+			set_apercu(false);
+			set_input_numero_ticket("");
+			set_input_site("");
+			set_input_nom_fournisseur("");
+			set_input_nom_technicien("");
+			set_input_periode("");
+			set_checked_ticket_ouvert(true);
+			set_input_conclusion_generale("")
+			setArray([  
+				{nom_equipement: "",
+				type_model: "" ,
+				num_serie: "",
+				etat: "" ,
+				observation: "" }]);	
+		}
+  }, [typeDeFiche]);
+  
+
+	useEffect(() => {
 		if (array.length==0) {
 			add_row();
 		}
-
 		showResult();
-  }, []);
+	}, []);
 
 	return (
 		<div className='ticket_container_ag' >
 
 			{readyToDownload && <div className='ticket'>
-				{apercu && 
+				{apercu && !afficher && 
 					<div className='button_container'>
 						<Button onClick={() => set_apercu(false)}>modifier</Button>
-						<Button onClick={() => telecharger()}>telecharger</Button>
+						<Button onClick={() => telecharger()}>enregistrer</Button>
 					</div>
 				}
 				{!apercu &&
@@ -228,11 +378,10 @@ function Fichepreventive({setCree_fiche_preventive, setDonnees_des_fiches, downl
 					}
 					</>
 				}
-				 
-				<canvas id="idCanvas" width="1765" height="2463"  ></canvas>
-			</div>}
-			<img src={return_button} id="return_button" alt="add" onClick={() =>{setCree_fiche_preventive(false);setDonnees_des_fiches(true) ;} }></img>			
-			{!apercu && <Button onClick={() => showResult()} id="preview_button">apercu</Button>}
+				<canvas id="idCanvas" width="1765" height="2463" style={{display : (apercu) ? "block" : "none"}} ></canvas>
+				</div>}
+			<img src={return_button} id="return_button" alt="add" onClick={() =>return_to_main()}></img>			
+			{!apercu && <Button onClick={() => {showResult(); set_apercu(true);}} id="preview_button">apercu</Button>}
 		</div>
 	);
 }
