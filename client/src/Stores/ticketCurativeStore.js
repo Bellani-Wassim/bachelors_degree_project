@@ -1,48 +1,31 @@
 import { makeObservable, observable, action } from 'mobx';
 import axios from 'axios';
 
-class TicketStore {
+class TicketCurativeStore {
 	constructor() {
 		makeObservable(this, {
-			tickets: observable,
+			ticketsC: observable,
 			setTickets: action,
 			loadTickets: action,
-			deleteTicket: action,
-			updateTickets: action,
-			addTickets: action
+			deleteTicket_curative: action,
+			updateTickets_curative: action,
+			addTickets_curative: action
 		});
 	}
 
-	tickets = [];
+	ticketsC = [];
 
   setTickets(tickets) {
-		this.tickets = tickets;
+		this.ticketsC = tickets;
 	}
 
   async loadTickets() {
 		await axios
-			.get('http://localhost:3546/api/fiche_preventive')
+			.get('http://localhost:3546/api/fiche_curative')
 			.then(({ data }) => this.setTickets(data))
 			.catch((error) => console.error(error));
 	}
 
-	addTickets(ticket) {
-		return axios
-			.post('http://localhost:3546/api/fiche_preventive', ticket)
-			.then((error) => console.error(error));
-	}
-
-	updateTickets(ticket) {
-		axios
-		 .put('http://localhost:3546/api/fiche_preventive/update', ticket)
-		 .then((error) => console.error(error));
-	}
-
-	deleteTicket(id) {
-		axios
-			.put('http://localhost:3546/api/fiche_preventive/delete', {id})
-			.then((error) => console.error(error));
-	}
 	addTickets_curative(ticket) {
 		return axios
 			.post('http://localhost:3546/api/fiche_curative', ticket)
@@ -62,4 +45,4 @@ class TicketStore {
 	}
 }
 
-export default new TicketStore();
+export default new TicketCurativeStore();

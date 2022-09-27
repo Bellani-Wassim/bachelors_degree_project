@@ -39,9 +39,15 @@ export default function SideBarNav({isAdmin}) {
             </li>
           </NavLink>
 
-          <NavLink to="/Ticket" className={isActiveClass}>
+          <NavLink to="/preventive" className={isActiveClass}>
             <li>
-              <h6>ticket</h6>
+              <h6>fiche preventive</h6>
+            </li>
+          </NavLink>
+
+          <NavLink to="/curative" className={isActiveClass}>
+            <li>
+              <h6>fiche curative</h6>
             </li>
           </NavLink>
 

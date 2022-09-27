@@ -17,6 +17,7 @@ import {
 	Contrat,
 	Plateforme,
 } from './pages';
+import Ticket_curative from './pages/Ticket_curative';
 
 function App() {
 	const [authenticated, setAuthenticated] = useState(false);
@@ -44,7 +45,10 @@ function App() {
 
 					<Route path="/plateformes" element={<Plateforme />} />
 
-					<Route path="/Ticket" element={<Ticket /> } />
+					<Route path="/preventive" element={<Ticket /> } />
+
+					<Route path="/curative" element={<Ticket_curative /> } />
+
 
 					{isAdmin && 
 					<>

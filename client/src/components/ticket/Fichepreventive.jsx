@@ -11,7 +11,7 @@ import return_button from '../../assets/images/return_button.svg'
 import FichePreventiveRow from '../basicComponents/FichePreventiveRow';
 import { Button } from '../basicComponents';
 
-function Fichepreventive({set_afficher, typeDeFiche, setCree_fiche_preventive, setDonnees_des_fiches, download, setDownload, indexDownload, setA, rowsData,afficher, set_modifier, modifier}) {
+function Fichepreventive({set_afficher, typeDeFiche, setCree_fiche_preventive, setDonnees_des_fiches, download, setDownload, indexDownload, rowsData,afficher, set_modifier, modifier}) {
 	const [array, setArray] = useState([]);
 	const [apercu, set_apercu] = useState(false);
 	const [input_numero_ticket, set_input_numero_ticket] = useState("");
@@ -20,7 +20,7 @@ function Fichepreventive({set_afficher, typeDeFiche, setCree_fiche_preventive, s
 	const [checked_ticket_ferme, set_checked_ticket_ferme] = useState(false);
 	const [input_site, set_input_site] = useState("");
 	const [input_conclusion_generale, set_input_conclusion_generale] = useState("");
-  const { ticketStore } = useContext(APIStoreContext);
+  const { ticketStore,socketStore } = useContext(APIStoreContext);
 	const [readyToDownload, setReadyToDownload] = useState(true);
 
 	const [input_nom_fournisseur, set_input_nom_fournisseur] = useState("");
@@ -48,7 +48,6 @@ function Fichepreventive({set_afficher, typeDeFiche, setCree_fiche_preventive, s
 	}
 
   const showResult = () => {
-		  console.log("showing the result");
 			var canvas = document.getElementById('idCanvas');
 			var context = canvas.getContext('2d');
 		
@@ -149,10 +148,11 @@ function Fichepreventive({set_afficher, typeDeFiche, setCree_fiche_preventive, s
 				conclusion_general:input_conclusion_generale,
 				equip_ursi:array
 			});
+			socketStore.socket.emit('tickets_a_changee');
 			return_to_main();
 		} else {
 			ReImg.fromCanvas(document.getElementById('idCanvas')).downloadPng();
-			if (!download) {
+			if (!download && input_numero_ticket.length !==0) {
 				ticketStore.addTickets({
 					id_ticket:input_numero_ticket,
 					id_site:input_site,
@@ -163,6 +163,7 @@ function Fichepreventive({set_afficher, typeDeFiche, setCree_fiche_preventive, s
 					conclusion_general:input_conclusion_generale,
 					equip_ursi:array
 				});
+				socketStore.socket.emit('tickets_a_changee');
 			}
 		}
 		set_apercu(false);
@@ -188,7 +189,6 @@ function Fichepreventive({set_afficher, typeDeFiche, setCree_fiche_preventive, s
   }, [download]);
 
 	const showResultForDownload = () => {
-		console.log("showing the result");
 			var canvas = document.getElementById('idCanvas');
 			var context = canvas.getContext('2d');
 		
@@ -290,7 +290,6 @@ function Fichepreventive({set_afficher, typeDeFiche, setCree_fiche_preventive, s
     if (typeof indexDownload !== "undefined" || indexDownload >-1) {
 			setReadyToDownload(true);
 			showResultForDownload(); 
-			setA(true);
     }
   }, [indexDownload]);
 

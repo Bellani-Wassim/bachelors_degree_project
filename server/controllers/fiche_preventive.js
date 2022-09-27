@@ -1,4 +1,4 @@
-const { Fiche_preventive , Equip_URSI } = require('../models');
+const { Fiche_preventive , Fiche_curative, Equip_URSI } = require('../models');
 
 module.exports = {
   get: async (req, res, next) => {

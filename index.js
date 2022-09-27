@@ -16,6 +16,14 @@ io.on("connection", (socket) => {
     io.emit("mettre_a_jour_fournisseur");
   });
 
+  socket.on("tickets_a_changee", () => {
+    io.emit("mettre_a_jour_tickets");
+  });
+
+  socket.on("ticketsC_a_changee", () => {
+    io.emit("mettre_a_jour_ticketsC");
+  });
+
   socket.on("techniciens_a_changee", () => {
     io.emit("mettre_a_jour_techniciens");
   });

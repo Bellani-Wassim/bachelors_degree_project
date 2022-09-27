@@ -18,7 +18,6 @@ function TableRow({rows_data_displayed, page, setDownload, setIndexDownload, set
   const displayClickOption = (index) => {
     if ((page =="ticket") && (typeof index !== "undefined")) {
       setIndexDownload(index);
-      console.log("index fdsfq= "+ index);
     }
     setDropdown((prev) => {
         return prev === index ? null : index;
@@ -39,14 +38,8 @@ function TableRow({rows_data_displayed, page, setDownload, setIndexDownload, set
             <p>{data.adresse}</p>
         </>)
       case "ticket":
-        let type;
-          if (data.severite_equip) {
-            type = "curative";
-          }else {
-            type = "preventive"
-          }
         return(<>
-            <p>{type}</p>
+            <p>{data.id_site}</p>
             <p>{data.id_ticket}</p>
             <p>{data.etat_ticket ? "ouvert" : "fermee"}</p>
             <p>{data.periode_ticket}</p>

@@ -48,6 +48,7 @@ export default function DropDownOptions({ rows_data_displayed, idx, displayClick
         const ticket_id = rows_data_displayed[idx].id_ticket;
         ticketStore.deleteTicket(ticket_id)
         socketStore.socket.emit('tickets_a_changee');
+        socketStore.socket.emit('ticketsC_a_changee');
         setArrowId(null);
         displayClickOption();
         return;
