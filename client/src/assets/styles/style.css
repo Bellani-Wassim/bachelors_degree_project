@@ -371,6 +371,7 @@ margin-top: 25px;
 .authentification {
   position: absolute;
   top: 50%;
+  height: 273px;
   left: 50%;
   transform: translate(-50%, -50%);
   display: flex;
@@ -378,7 +379,11 @@ margin-top: 25px;
   padding: 15px 15px 15px 15px;
   background-color: var(--Dark-color-300);
   border-radius: 10px;
-  width: 222px;
+  width: 279px;
+}
+.authentification h4{
+  margin-bottom: 16px;
+  font-size: 30px;
 }
 
 .waiting_message{
@@ -392,7 +397,7 @@ margin-top: 25px;
 
 .authentification h4{
   color: #FFF;
-  margin-bottom: 7px;
+  margin-bottom: 14px;
 }
 
 .authentification input{
@@ -404,15 +409,27 @@ margin-top: 25px;
   height: 18px;
 }
 
+
 .authentification h4{
   text-align: center;
 }
 
+.authentification input{
+  font-size: 16px;
+  height: 24px;
+  margin-bottom: 4px;
+}
+
 .boutonsSauthenrifier p{
-  float: left;
+  position: absolute;
   cursor: pointer;
   color: #FFF;
-  font-size: 15px;
+  bottom: 11px;
+  margin-top: 25x;
+  font-size: 19px;
+}
+.authentification label{
+  font-size: 23px;
 }
 
 .boutonsSauthenrifier p:hover{
@@ -427,7 +444,7 @@ margin-top: 25px;
   padding: 0px 3px 2px 3px;
   bottom: 12px;
   right: 10px;
-  font-size: 15px;
+  font-size: 19px;
 }
 
 .boutonsSauthenrifier {
