@@ -49,6 +49,8 @@ function App() {
 
 					<Route path="/curative" element={<Ticket_curative /> } />
 
+					<Route path="/contrats" element={<Contrat /> } />
+
 
 					{isAdmin && 
 					<>

@@ -63,8 +63,8 @@ function Equipement() {
         <p>Numero de serie</p>
         <p>FRU</p>
         <p>Nom</p>
-        <p>Id site</p>
-        <p>Id plateforme</p>
+        <p>Site</p>
+        <p>Plateforme</p>
         <p>Severite</p>
         <p>Date mise en marche</p>
         <p>Date fin de service</p>

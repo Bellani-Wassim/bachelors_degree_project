@@ -145,7 +145,9 @@ function Fichecurative({set_afficher, typeDeFiche, setCree_fiche_preventive, set
 				socketStore.socket.emit('ticketsC_a_changee');
 			}
 		}
+		setCree_fiche_preventive(false);
 		set_apercu(false);
+		setDonnees_des_fiches(true);
 	}
 
   useEffect(() => {

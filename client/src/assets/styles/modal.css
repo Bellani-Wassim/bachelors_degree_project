@@ -1,4 +1,4 @@
-.modal-container {
+.modal-container,.modal-container-curativeARisque {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,8 +7,15 @@
   background-color: rgba(0, 0, 0, .5);
 }
 
+.modal-container-curativeARisque .modal{
+  height: 500px;
+  width: 700px;
+  padding-top:40px;
+}
+
 #myAccount {
   width: 700px;
+  height: 445px;
 }
 
 .modal, .modal_type_de_fiche{

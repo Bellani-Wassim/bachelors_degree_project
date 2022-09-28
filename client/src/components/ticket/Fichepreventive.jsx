@@ -166,7 +166,9 @@ function Fichepreventive({set_afficher, typeDeFiche, setCree_fiche_preventive, s
 				socketStore.socket.emit('tickets_a_changee');
 			}
 		}
+		setCree_fiche_preventive(false);
 		set_apercu(false);
+		setDonnees_des_fiches(true);
 	}
 
 	const add_row = () => {

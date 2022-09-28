@@ -338,6 +338,20 @@ margin-top: 25px;
   z-index: 1;
 }
 
+.listeCurative {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.listeCurative h6:nth-child(2){
+  border-radius: 100%;
+  background-color: rgb(241, 74, 74);
+  width: 22px;
+  height: 23px;
+  text-align: center;
+}
+
 .dropDownOption{
   width:100px;
   height: 54px;

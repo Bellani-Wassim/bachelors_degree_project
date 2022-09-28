@@ -3,7 +3,7 @@ import Technicien from './Technicien.jsx';
 import Equipement from './Equipement.jsx';
 import Contrat from './Contrat.jsx';
 import Plateforme from './Plateforme.jsx';
-import Inscription from './Inscription.jsx'
+import Inscription from './Inscription.jsx';
 
 export {
 	Fournisseur, Technicien, Equipement, Contrat, Plateforme, Inscription

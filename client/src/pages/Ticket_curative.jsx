@@ -3,6 +3,7 @@ import { Button } from "../components/basicComponents";
 import TypeDeFiche from "../components/ticket/TypeDeFiche";
 import { observer } from "mobx-react";
 import "../assets/styles/ficheDinterventionGenerator.css";
+import exit from '../assets/images/exit.svg';
 import { APIStoreContext } from "../APIStoreContext";
 import SearchInput from "../components/SearchInput";
 import TableRow from "../components/basicComponents/TableRow";
@@ -21,13 +22,31 @@ function Ticket_curative() {
 
   const [rowsData, setRowsData] = useState([]);
   const [modifier, set_modifier] = useState(false);
+  const [consulter, setConsulter] = useState(false);
   const [afficher, set_afficher] = useState(false);
   const [rowsDataDisplayed, setRowsDataDisplayed]=useState(rowsData) ;
 
+  const [numFicheArisque, setNumFicheArisque] = useState();
+  const calculate = () => {
+    let tmpArray=[];
+    ticketCurativeStore.ticketsC.map((item)=>{
+      if(item.etat_ticket){
+        var today = new Date();
+        var date_to_reply = new Date(item.date_reponse);
+        var timeinmilisec = date_to_reply.getTime() - today.getTime();
+        if(Math.ceil(timeinmilisec / (1000 * 60 * 60 * 24))<-5){
+          tmpArray.push(item);
+        }
+      }
+    })
+    setNumFicheArisque(tmpArray.length);
+  }
   socketStore.socket.on("mettre_a_jour_ticketsC",() => {
-    ticketCurativeStore.loadTickets().then(() => 
-      setRowsData(ticketCurativeStore.ticketsC)
-    )
+    ticketCurativeStore.loadTickets().then(() =>
+    { 
+      setRowsData(ticketCurativeStore.ticketsC);
+      calculate();
+    })
   })
 
   const creefiche = () => {
@@ -36,9 +55,11 @@ function Ticket_curative() {
   }
 
   useEffect(() => {
-    ticketCurativeStore.loadTickets().then(() => 
-      setRowsData(ticketCurativeStore.ticketsC)
-    )
+    ticketCurativeStore.loadTickets().then(() =>
+    { 
+      setRowsData(ticketCurativeStore.ticketsC);
+      calculate();
+    })
   }, []);
 
   useEffect(() => {
@@ -94,8 +115,8 @@ function Ticket_curative() {
                 <p>Periode</p>
                 <p>Fournisseur</p>
                 <p>Technicien</p>
-              </div>
-              <div className="tableBody">
+            </div>
+            <div className="tableBody">
                 <TableRow 
                 rows_data_displayed={rowsDataDisplayed} 
                 page="ticket"
@@ -105,7 +126,46 @@ function Ticket_curative() {
                 setType_curative={setType_curative}
                 setIndexDownload={setIndexDownload}
                 setDownload={setDownload}/>
+            </div>
+            {(numFicheArisque!=0)? <div className="ficheArisqueModal">
+            {!consulter &&  
+             <> <h3>le nombre d'equipements a risque est de {numFicheArisque}</h3>
+              <h3 onClick={()=>setConsulter(true)}> consulter</h3></>}
+              <div className={`modal-container-curativeARisque ${consulter ? "" : "d-none"}`}>
+              <div className="modal">
+              <img className="closeIcon" src={exit} alt="quitter" onClick={() => setConsulter(false)}/>
+              <div className="tableHeaderTicket">
+                <p>Equipement</p>
+                <p>Ticket</p>
+                <p>Etat</p>
+                <p>Severite</p>
+                <p>Date reponse</p>
               </div>
+              {ticketCurativeStore.ticketsC.map((item)=>{
+                if(item.etat_ticket){
+                  var today = new Date();
+                  var date_to_reply = new Date(item.date_reponse);
+                  var timeinmilisec = date_to_reply.getTime() - today.getTime();
+                  console.log(date_to_reply+"donc = "+Math.ceil(timeinmilisec / (1000 * 60 * 60 * 24)));
+                  if(Math.ceil(timeinmilisec / (1000 * 60 * 60 * 24))<-4){
+                    return (
+                      <div className="tableRowticket" key={item.num_serie}>
+                        <>
+                          <p>{item.num_serie}</p>
+                          <p>{item.id_ticket}</p>
+                          <p>{item.etat_machine_final}</p>
+                          <p>{item.severite_equip}</p>
+                          <p>{item.date_reponse}</p>
+                        </>
+                      </div>
+                    )
+                  }
+                }
+              })}
+              </div>
+            </div>
+            </div>: <></>}
+            
           </div>
 					}
           

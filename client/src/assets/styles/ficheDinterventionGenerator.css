@@ -1,3 +1,38 @@
+.ficheArisqueModal {
+  position: absolute;
+  top: 44px;
+  right: 200px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.ficheArisqueModal .closeIcon {
+  height: 27px;
+  width: 27px;
+  top: 12px;
+  right: 8px;
+}
+.ficheArisqueModal h3{
+  color: rgb(253, 123, 123);
+  text-align: center;
+  font-size: 21px;
+}
+
+.ficheArisqueModal .tableRowticket{
+  padding-left: 24px;
+  margin-bottom: 17px;
+}
+
+.ficheArisqueModal .tableHeaderTicket {
+  margin: 0px 0px 15px 0px;
+  padding: 0px 0px 0px 21px}
+
+.ficheArisqueModal h3:nth-child(2){
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 #ticket {
   height: 1500px;
 }

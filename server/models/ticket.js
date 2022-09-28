@@ -32,7 +32,6 @@ module.exports = (sequelize, DataTypes) => {
     Ticket.belongsTo(models.Technicien, { foreignKey: 'id_technicien' });
     Ticket.belongsTo(models.Equipement, { foreignKey: 'num_serie_equipement' });
     Ticket.belongsTo(models.Plateforme, { foreignKey: 'id_plateforme' });
-    Ticket.belongsTo(models.IGE, { foreignKey: 'id_IGE' });
   };
 
   return Ticket;

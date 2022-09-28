@@ -1,0 +1,41 @@
+.tableRowContrat{
+  display: flex;
+  flex-direction: row;
+  padding-left: 45px;
+  margin-bottom: 25px;
+  margin-right: 98px;
+}
+
+.tableHeaderContrat {
+  min-height: 54px;
+  margin: 0px 28px 15px 28px;
+  padding: 0px 115px 0px 45px;
+  border-radius: 7px;
+  background-color: var(--Dark-color-300);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.tableHeaderContrat >p,.tableRowContrat >p ,.rowInfoContrat >p{
+  flex:1;
+}
+
+.tableHeaderContrat > p:nth-child(1),.tableRowContrat > p:nth-child(1) {
+  flex-grow: 2;
+}
+
+.tableHeaderContrat > p:nth-child(2),.tableRowContrat > p:nth-child(2) {
+  flex-grow: 2;
+}
+
+.tableHeaderContrat > p:nth-child(3),.tableRowContrat > p:nth-child(3) {
+  flex-grow: 3;
+}
+
+.tableHeaderContrat > p:nth-child(4),.tableRowContrat > p:nth-child(4) {
+  flex-grow: 3;
+}
+
+.tableHeaderContrat > p:nth-child(5),.tableRowContrat > p:nth-child(5) {
+  flex-grow: 3;
+}
